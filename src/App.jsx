@@ -36,6 +36,7 @@ const App = () => {
   const startNewLife = async () => {
     try {
       const backstory = await generateBackstory();
+      console.log("Backstory name ", backstory.name);
       const newGameState = {
         id: uuidv4(),
         name: backstory.name,

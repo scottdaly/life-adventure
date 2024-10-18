@@ -4,9 +4,8 @@ import React from "react";
 const ChoiceSelection = ({
   scenario,
   choices,
-  onSelect,
   selectedIndex,
-  choiceOutcome,
+  setSelectedIndex,
   age,
   decisionsMadeThisYear,
   decisionsThisYear,
@@ -27,11 +26,6 @@ const ChoiceSelection = ({
 
   return (
     <div className="mb-4">
-      {choiceOutcome && (
-        <div className="py-4 rounded mb-4 ibm-plex-mono-regular tracking-tight text-lg">
-          <p className="text-zinc-200">{choiceOutcome}</p>
-        </div>
-      )}
       <div className="flex justify-between">
         <div>
           <h2 className="text-zinc-400">Your Choices</h2>
@@ -58,10 +52,10 @@ const ChoiceSelection = ({
               key={index}
               className={`flex w-full text-start bg-zinc-800 py-4 px-4 rounded ibm-plex-mono-regular ${
                 selectedIndex === index
-                  ? "bg-yellow-900"
+                  ? "bg-yellow-800"
                   : "hover:bg-yellow-950"
               }`}
-              onClick={() => onSelect(index)}
+              onClick={() => setSelectedIndex(index)}
             >
               <div className="flex items-center justify-center h-full w-12">
                 <ArrowRightIcon className="w-8 h-8 mr-2" />

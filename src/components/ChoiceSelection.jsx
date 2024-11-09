@@ -52,7 +52,7 @@ const ChoiceSelection = ({
               key={index}
               className={`flex w-full text-start bg-zinc-800 py-4 px-4 rounded ibm-plex-mono-regular ${
                 selectedIndex === index
-                  ? "bg-yellow-800"
+                  ? "bg-yellow-900"
                   : "hover:bg-yellow-950"
               }`}
               onClick={() => setSelectedIndex(index)}

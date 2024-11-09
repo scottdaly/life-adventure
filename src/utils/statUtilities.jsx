@@ -55,83 +55,79 @@ export const getHealthIcon = (health) => {
 
 export const getIntelligence = (intelligence) => {
   if (intelligence > 95) {
-    return <p className="ibm-plex-mono-regular text-center">Genius</p>;
+    return <p className="ibm-plex-mono-regular text-end">Genius</p>;
   } else if (intelligence > 80) {
-    return <p className="ibm-plex-mono-regular text-center">Gifted</p>;
+    return <p className="ibm-plex-mono-regular text-end">Gifted</p>;
   } else if (intelligence > 60) {
-    return <p className="ibm-plex-mono-regular text-center">Above Average</p>;
+    return <p className="ibm-plex-mono-regular text-end">Above Average</p>;
   } else if (intelligence > 40) {
-    return <p className="ibm-plex-mono-regular text-center">Average</p>;
+    return <p className="ibm-plex-mono-regular text-end">Average</p>;
   } else if (intelligence > 20) {
-    return <p className="ibm-plex-mono-regular text-center">Kinda Dumb</p>;
+    return <p className="ibm-plex-mono-regular text-end">Kinda Dumb</p>;
   }
-  return <p className="ibm-plex-mono-regular text-center">Idiot</p>;
+  return <p className="ibm-plex-mono-regular text-end">Idiot</p>;
 };
 
 export const getCharisma = (charisma) => {
   if (charisma > 95) {
-    return <p className="ibm-plex-mono-regular text-center">Cult Leader</p>;
+    return <p className="ibm-plex-mono-regular text-end">Cult Leader</p>;
   } else if (charisma > 80) {
-    return <p className="ibm-plex-mono-regular text-center">Very Likeable</p>;
+    return <p className="ibm-plex-mono-regular text-end">Very Likeable</p>;
   } else if (charisma > 60) {
-    return <p className="ibm-plex-mono-regular text-center">Likeable</p>;
+    return <p className="ibm-plex-mono-regular text-end">Likeable</p>;
   } else if (charisma > 40) {
-    return <p className="ibm-plex-mono-regular text-center">Average</p>;
+    return <p className="ibm-plex-mono-regular text-end">Average</p>;
   } else if (charisma > 20) {
     return (
-      <p className="ibm-plex-mono-regular text-center">Somewhat Offputting</p>
+      <p className="ibm-plex-mono-regular text-end">Somewhat Offputting</p>
     );
   }
-  return <p className="ibm-plex-mono-regular text-center">Super Weird</p>;
+  return <p className="ibm-plex-mono-regular text-end">Super Weird</p>;
 };
 
 export const getFitness = (fitness) => {
   if (fitness > 95) {
-    return <p className="ibm-plex-mono-regular text-center">Greek God</p>;
+    return <p className="ibm-plex-mono-regular text-end">Greek God</p>;
   } else if (fitness > 80) {
-    return <p className="ibm-plex-mono-regular text-center">Elite Athlete</p>;
+    return <p className="ibm-plex-mono-regular text-end">Elite Athlete</p>;
   } else if (fitness > 60) {
-    return <p className="ibm-plex-mono-regular text-center">Strong</p>;
+    return <p className="ibm-plex-mono-regular text-end">Strong</p>;
   } else if (fitness > 40) {
-    return <p className="ibm-plex-mono-regular text-center">Decent</p>;
+    return <p className="ibm-plex-mono-regular text-end">Decent</p>;
   } else if (fitness > 20) {
-    return <p className="ibm-plex-mono-regular text-center">Kinda Scrawny</p>;
+    return <p className="ibm-plex-mono-regular text-end">Kinda Scrawny</p>;
   }
-  return <p className="ibm-plex-mono-regular text-center">Weakling</p>;
+  return <p className="ibm-plex-mono-regular text-end">Weakling</p>;
 };
 
 export const getCreativity = (creativity) => {
   if (creativity > 95) {
-    return <p className="ibm-plex-mono-regular text-center">Da Vinci</p>;
+    return <p className="ibm-plex-mono-regular text-end">Da Vinci</p>;
   } else if (creativity > 80) {
-    return <p className="ibm-plex-mono-regular text-center">Idea Machine</p>;
+    return <p className="ibm-plex-mono-regular text-end">Idea Machine</p>;
   } else if (creativity > 60) {
-    return <p className="ibm-plex-mono-regular text-center">Talented</p>;
+    return <p className="ibm-plex-mono-regular text-end">Talented</p>;
   } else if (creativity > 40) {
-    return <p className="ibm-plex-mono-regular text-center">Average</p>;
+    return <p className="ibm-plex-mono-regular text-end">Average</p>;
   } else if (creativity > 20) {
-    return <p className="ibm-plex-mono-regular text-center">Less Artistic</p>;
+    return <p className="ibm-plex-mono-regular text-end">Less Artistic</p>;
   }
-  return <p className="ibm-plex-mono-regular text-center">Uninspired</p>;
+  return <p className="ibm-plex-mono-regular text-end">Uninspired</p>;
 };
 
 export const getPhysicalAttractiveness = (physicalAttractiveness) => {
   if (physicalAttractiveness > 95) {
-    return <p className="ibm-plex-mono-regular text-center">Model</p>;
+    return <p className="ibm-plex-mono-regular">Model</p>;
   } else if (physicalAttractiveness > 80) {
-    return <p className="ibm-plex-mono-regular text-center">Pretty Hot</p>;
+    return <p className="ibm-plex-mono-regular">Pretty Hot</p>;
   } else if (physicalAttractiveness > 60) {
-    return (
-      <p className="ibm-plex-mono-regular text-center">Decently Attractive</p>
-    );
+    return <p className="ibm-plex-mono-regular">Decently Attractive</p>;
   } else if (physicalAttractiveness > 40) {
-    return <p className="ibm-plex-mono-regular text-center">Average</p>;
+    return <p className="ibm-plex-mono-regular">Average</p>;
   } else if (physicalAttractiveness > 20) {
-    return (
-      <p className="ibm-plex-mono-regular text-center">Not Very Attractive</p>
-    );
+    return <p className="ibm-plex-mono-regular">Not Very Attractive</p>;
   }
-  return <p className="ibm-plex-mono-regular text-center">Plain Ugly</p>;
+  return <p className="ibm-plex-mono-regular">Plain Ugly</p>;
 };
 
 export const getRelationshipStatus = (relationshipStatus) => {

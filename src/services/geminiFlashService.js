@@ -1,6 +1,10 @@
 const API_ENDPOINT = "http://localhost:3000";
 
 export async function generateScenario(gameState, relationships) {
+  console.log(
+    "Generating scenario - Here are the relationships",
+    relationships
+  );
   const response = await fetch(`${API_ENDPOINT}/generate-scenario`, {
     method: "POST",
     headers: {

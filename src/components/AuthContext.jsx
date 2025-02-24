@@ -2,7 +2,7 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 
 const AuthContext = createContext(null);
-const API_ENDPOINT = "http://localhost:3000";
+const API_ENDPOINT = import.meta.env.VITE_API_URL || "";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
   // Login function
   const login = async (email, password) => {
     try {
-      const response = await fetch("http://localhost:3000/auth/login", {
+      const response = await fetch(`${API_ENDPOINT}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }) => {
   // Register function
   const register = async (email, password) => {
     try {
-      const response = await fetch("http://localhost:3000/auth/register", {
+      const response = await fetch(`${API_ENDPOINT}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -88,7 +88,7 @@ export const AuthProvider = ({ children }) => {
   // Logout function
   const logout = async () => {
     try {
-      const response = await fetch("http://localhost:3000/auth/logout", {
+      const response = await fetch(`${API_ENDPOINT}/auth/logout`, {
         method: "GET",
         credentials: "include", // Include cookies in request
       });
@@ -107,7 +107,7 @@ export const AuthProvider = ({ children }) => {
   const refreshAuthToken = async () => {
     try {
       const response = await fetchWithAuth(
-        "http://localhost:3000/auth/refresh-token",
+        `${API_ENDPOINT}/auth/refresh-token`,
         {
           method: "POST",
           credentials: "include", // Include cookies in request

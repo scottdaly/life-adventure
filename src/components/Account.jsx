@@ -4,6 +4,8 @@ import { useAuth } from "./AuthContext";
 import { fetchWithAuth } from "./AuthContext";
 import { ChevronLeft } from "lucide-react";
 
+const API_URL = import.meta.env.VITE_API_URL || "";
+
 const Account = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -18,7 +20,7 @@ const Account = () => {
   const handleDeleteAccount = async () => {
     setIsDeleting(true);
     try {
-      const response = await fetchWithAuth("http://localhost:3000/api/user", {
+      const response = await fetchWithAuth(`${API_URL}/api/user`, {
         method: "DELETE",
       });
 

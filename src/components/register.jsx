@@ -11,6 +11,7 @@ const Register = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
   const { register } = useAuth();
+  const API_URL = import.meta.env.VITE_API_URL || "";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -88,7 +89,7 @@ const Register = () => {
       {error && <p className="text-red-400">{error}</p>}
       <p className="text-zinc-400 my-2 text-center">or</p>
       <a
-        href="http://localhost:3000/auth/google"
+        href={`${API_URL}/auth/google`}
         className="border border-zinc-100 w-full p-2 rounded-md text-center"
       >
         Register with Google

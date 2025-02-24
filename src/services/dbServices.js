@@ -66,6 +66,7 @@ export const saveGame = async (
       }),
     });
 
+    console.log("Saved game", response);
     const data = await response.json();
 
     return data.gameState;
@@ -162,6 +163,7 @@ export const saveNewRelationships = async (gameId, relationships) => {
 };
 
 export const updateRelationship = async (gameId, relationship) => {
+  console.log("Updating relationship", relationship);
   try {
     const response = await fetchWithAuth(
       `${API_ENDPOINT}/relationships/${relationship.id}`,
@@ -177,7 +179,7 @@ export const updateRelationship = async (gameId, relationship) => {
       }
     );
     const data = await response.json();
-
+    console.log("Updated relationship", data);
     return data.relationship;
   } catch (error) {
     console.error("Error updating relationship:", error);

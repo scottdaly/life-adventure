@@ -22,7 +22,6 @@ const GameState = ({ gameState, relationships, handleEndLife }) => {
   const [showRelationships, setShowRelationships] = useState(false);
   const [showBackstory, setShowBackstory] = useState(false);
 
-  // console.log("Game state from GameState component", gameState);
 
   const getNetWorth = (netWorth) => {
     let netWorthString = netWorth.toLocaleString();

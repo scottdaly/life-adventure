@@ -23,6 +23,7 @@ export async function evaluateChoice(
   gameState,
   relationships
 ) {
+  // Call the evaluate-choice endpoint to get the outcome of the choice and return the data
   const response = await fetch(`${API_ENDPOINT}/evaluate-choice`, {
     method: "POST",
     headers: {

@@ -22,8 +22,6 @@ const ChoiceSelection = ({
 
   if (!choices.length) return null;
 
-  console.log("Choices", choices);
-
   return (
     <div className="mb-4">
       <div className="flex justify-between">
@@ -50,18 +48,22 @@ const ChoiceSelection = ({
           return (
             <button
               key={index}
-              className={`flex w-full text-start bg-zinc-800 py-4 px-4 rounded ibm-plex-mono-regular ${
-                selectedIndex === index
-                  ? "bg-yellow-900"
-                  : "hover:bg-yellow-950"
+              className={`flex w-full text-start bg-zinc-800 py-4 px-4 border-2 rounded ibm-plex-mono-regular ${
+                selectedIndex === index ? "bg-yellow-900 border-zinc-400" : "hover:bg-yellow-950"
               }`}
+              style={{
+                backgroundColor: selectedIndex === index ? " rgb(43 53 48)" : "rgb(39 39 42)",
+                borderColor: selectedIndex === index ? "rgb(111 111 120)" : "transparent",
+              }}
               onClick={() => setSelectedIndex(index)}
             >
               <div className="flex items-center justify-center h-full w-12">
                 <ArrowRightIcon className="w-8 h-8 mr-2" />
+                
               </div>
               <div className="flex flex-col flex-1">
                 {renderText(choice.choiceText)}
+                
               </div>
             </button>
           );

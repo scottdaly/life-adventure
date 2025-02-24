@@ -69,6 +69,10 @@ const Game = () => {
     }
   }, []);
 
+  useEffect(() => {
+    console.log("relationships were changed", relationships);
+  }, [relationships]);
+
   const generateNewScenario = async (newGameState) => {
     if (!newGameState) return;
     setIsLoading(true);
@@ -91,6 +95,8 @@ const Game = () => {
     relationships
   ) => {
     console.log("Sending to evaluate choice for age", gameState.age);
+
+    // Call the evaluateChoice endpoint in geminiFlashService.js to get the outcome of the choice and return the data
     const evaluation = await evaluateChoice(
       choice,
       scenario,
@@ -98,23 +104,36 @@ const Game = () => {
       relationships
     );
     let changes = "";
+
+    console.log("Evaluation is", evaluation);
+
+    // Sets the text for the user to read the outcome of the choice and displays it
     setChoiceOutcome(evaluation.outcome);
     setOutcomeDisplaying(true);
+
+    // Adds the summary, outcome, and notable life event to the changes string
     changes += evaluation.summary ? `Summary: ${evaluation.summary}\n` : "";
     changes += evaluation.outcome ? `Outcome: ${evaluation.outcome}\n` : "";
     changes += evaluation.notableLifeEvent
       ? `Notable Life Event: ${evaluation.notableLifeEvent}\n`
       : "";
+
+    // Adds the new relationships to the changes string
+    console.log("New relationships are", evaluation.newRelationshipsArray);
     changes += evaluation.newRelationshipsArray
       ? `New Relationships: ${evaluation.newRelationshipsArray
           .map((relationship) => relationship.name)
           .join(", ")}\n`
       : "";
+
+    // Adds the removed relationships to the changes string
+    console.log("Removed relationships are", evaluation.removedRelationshipsArray);
     changes += evaluation.removedRelationshipsArray
       ? `Removed Relationships: ${evaluation.removedRelationshipsArray
           .map((relationship) => relationship.name)
           .join(", ")}\n`
       : "";
+    
     if (evaluation.summary) {
       setGameState((prevState) => ({
         ...prevState,
@@ -131,9 +150,11 @@ const Game = () => {
       }));
     }
     if (evaluation.newRelationshipsArray) {
+      console.log("Saving new relationships", evaluation.newRelationshipsArray);
       saveNewRelationships(gameState.id, evaluation.newRelationshipsArray);
     }
     if (evaluation.removedRelationshipsArray) {
+      console.log("Removing relationships", evaluation.removedRelationshipsArray);
       setGameState((prevState) => ({
         ...prevState,
         relationships: prevState.relationships.filter(
@@ -145,7 +166,10 @@ const Game = () => {
         ),
       }));
     }
+
+    // Updates the history and life events
     const newHistory = [...gameState.history];
+
     if (evaluation.summary) {
       newHistory.push(evaluation.summary);
     }
@@ -159,10 +183,16 @@ const Game = () => {
 
   const handleContinue = async () => {
     console.log("Handling continue for age ", gameState.age);
+    // If there is no game state, return
     if (!gameState) return;
+
+    // Sets the loading to true
     setIsLoading(true);
+
+    // Initializes the net worth change to 0
     let netWorthChange = 0;
 
+    // Sends the choice to the evaluateChoice function
     const { newHistory, newLifeEvents } = await sendToEvaluateChoice(
       choices[selectedChoiceIndex],
       currentScenario,
@@ -172,11 +202,14 @@ const Game = () => {
     const newRelationships = [];
 
     console.log("Evalutated choice, age is", gameState.age);
+    console.log("Relationships are", relationships);
     relationships.map(async (relationship, index) => {
+      console.log("Updating relationship", relationship);
       const olderRelationship = {
         ...relationship,
         age: relationship.age + ageFactor,
       };
+      console.log("About to update relationship", olderRelationship);
       const updatedRelationship = await updateRelationship(
         gameState.id,
         olderRelationship
@@ -250,6 +283,8 @@ const Game = () => {
       ageFactor
     );
 
+  
+
     if (updatedGame) {
       await setGameState(updatedGame);
     }
@@ -320,6 +355,7 @@ const Game = () => {
       ) : (
         <div className="flex flex-col-reverse md:flex-row">
           <div className="w-full md:w-1/3">
+          {/* Sidebar to display the state of the game (stats, relationships, etc.) */}
             <GameState
               gameState={gameState}
               relationships={relationships}

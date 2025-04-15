@@ -51,7 +51,7 @@ const GameState = ({ gameState, relationships, handleEndLife }) => {
   };
 
   return (
-    <div className="border border-zinc-700 p-4 rounded-lg mb-4">
+    <div className="border border-zinc-300 dark:border-zinc-700 p-4 rounded-lg mb-4">
       <div className="flex flex-col">
         <div className="w-full">
           <p className="text-lg ibm-plex-mono-medium">
@@ -59,39 +59,39 @@ const GameState = ({ gameState, relationships, handleEndLife }) => {
           </p>
 
           <p className="flex flex-col mt-4">
-            <strong className="text-sm text-zinc-400">Location</strong>{" "}
+            <strong className="text-sm text-zinc-500 dark:text-zinc-400 transition-colors duration-500">Location</strong>{" "}
             <span className="ibm-plex-mono-regular tracking-tight">
               {gameState.location || "Unknown"}
             </span>
           </p>
           <div className="flex w-full gap-2 mt-8">
-            <div className="flex flex-1 flex-col border border-zinc-700 rounded-lg p-2 items-center justify-center text-center">
+            <div className="flex flex-1 flex-col border border-zinc-300 dark:border-zinc-700 transition-colors duration-500 rounded-lg p-2 items-center justify-center text-center">
               <p className="ibm-plex-mono-medium text-xl">
                 ${getNetWorth(gameState.net_worth)}
               </p>
-              <p className="text-sm text-zinc-400">Net Worth</p>
+              <p className="text-sm text-zinc-500 dark:text-zinc-400 transition-colors duration-500">Net Worth</p>
             </div>
-            <div className="flex flex-1 flex-col border border-zinc-700 rounded-lg p-2 items-center text-center">
+            <div className="flex flex-1 flex-col border border-zinc-300 dark:border-zinc-700 transition-colors duration-500 rounded-lg p-2 items-center text-center">
               <p className="text-2xl">
                 {getHappinessEmoji(gameState.stats.happiness)}
               </p>
               {getHappiness(gameState.stats.happiness)}
             </div>
           </div>
-          <div className="flex flex-1 mt-2 items-center border border-zinc-700 rounded-lg py-2 px-4">
+          <div className="flex flex-1 mt-2 items-center border border-zinc-300 dark:border-zinc-700 transition-colors duration-500 rounded-lg py-2 px-4">
             {getHealthIcon(gameState.stats.health)}
             <div className="flex flex-col">
-              <p className="text-sm text-bold text-zinc-400">Health</p>
+              <p className="text-sm text-bold text-zinc-500 dark:text-zinc-400 transition-colors duration-500">Health</p>
               {getHealth(gameState.stats.health)}
             </div>
           </div>
-          <div className="w-full h-[1px] bg-zinc-700 mt-8"></div>
+          <div className="w-full h-[1px] bg-zinc-300 dark:bg-zinc-700 transition-colors duration-500 mt-8"></div>
           <div
             className="flex justify-between mt-6 cursor-pointer"
             onClick={() => setShowStats(!showStats)}
           >
-            <p className="text-bold text-zinc-400">Stats</p>
-            <div className="flex items-center text-zinc-400">
+            <p className="text-bold text-zinc-600 dark:text-zinc-400 transition-colors duration-500">Stats</p>
+            <div className="flex items-center text-zinc-500 dark:text-zinc-400 transition-colors duration-500">
               {showStats ? <ChevronUpIcon /> : <ChevronDownIcon />}
             </div>
           </div>
@@ -100,72 +100,72 @@ const GameState = ({ gameState, relationships, handleEndLife }) => {
             <div>
               <div className="flex flex-col mt-6 mb-12">
                 <div className="flex flex-col gap-1 items-start justify-start">
-                  <p className="text-sm text-bold text-zinc-400">Appearance</p>
+                  <p className="text-sm text-bold text-zinc-500 dark:text-zinc-400 transition-colors duration-500">Appearance</p>
                   <div className="text-start">
                     {getPhysicalAttractiveness(gameState.stats.appearance)}
                   </div>
                 </div>
               </div>
               <div className="flex flex-col gap-2 mt-4">
-                <div className="w-full h-2 bg-zinc-700 rounded-full overflow-hidden">
+                <div className="w-full h-2 bg-zinc-300 dark:bg-zinc-700 transition-colors duration-500 rounded-full overflow-hidden">
                   <div
-                    className="bg-indigo-400  h-2 rounded-sm"
+                    className="bg-indigo-500 dark:bg-indigo-400 h-2 rounded-sm"
                     style={{ width: `${gameState.stats.intelligence}%` }}
                   ></div>
                 </div>
                 <div className="flex justify-between">
-                  <p className="text-sm text-bold text-zinc-400">
+                  <p className="text-sm text-bold text-zinc-500 dark:text-zinc-400 transition-colors duration-500">
                     Intelligence
                   </p>
                   {getIntelligence(gameState.stats.intelligence)}
                 </div>
               </div>
               <div className="flex flex-col gap-2 mt-8">
-                <div className="w-full h-2 bg-zinc-700 rounded-full overflow-hidden">
+                <div className="w-full h-2 bg-zinc-300 dark:bg-zinc-700 transition-colors duration-500 rounded-full overflow-hidden">
                   <div
-                    className="bg-indigo-400  h-2 rounded-sm"
+                    className="bg-indigo-500 dark:bg-indigo-400 h-2 rounded-sm"
                     style={{ width: `${gameState.stats.charisma}%` }}
                   />
                 </div>
-                <div className="flex justify-between">
-                  <p className="text-sm text-bold text-zinc-400">Charisma</p>
+                <div className="flex justify-between gap-2">
+                  <p className="text-sm text-bold text-zinc-500 dark:text-zinc-400 transition-colors duration-500">Charisma</p>
                   {getCharisma(gameState.stats.charisma)}
                 </div>
               </div>
 
               <div className="flex flex-col gap-2 mt-8">
-                <div className="w-full h-2 bg-zinc-700 rounded-full overflow-hidden">
+                <div className="w-full h-2 bg-zinc-300 dark:bg-zinc-700 transition-colors duration-500 rounded-full overflow-hidden">
                   <div
-                    className="bg-indigo-400  h-2 rounded-sm"
+                    className="bg-indigo-500 dark:bg-indigo-400 h-2 rounded-sm"
                     style={{ width: `${gameState.stats.fitness}%` }}
                   />
                 </div>
-                <div className="flex justify-between">
-                  <p className="text-sm text-bold text-zinc-400">Fitness</p>
+                <div className="flex justify-between gap-2">
+                  <p className="text-sm text-bold text-zinc-500 dark:text-zinc-400 transition-colors duration-500">Fitness</p>
                   {getFitness(gameState.stats.fitness)}
                 </div>
               </div>
               <div className="flex flex-col gap-2 mt-8">
-                <div className="w-full h-2 bg-zinc-700 rounded-full overflow-hidden">
+                <div className="w-full h-2 bg-zinc-300 dark:bg-zinc-700 transition-colors duration-500 rounded-full overflow-hidden">
                   <div
-                    className="bg-indigo-400  h-2 rounded-sm"
+                    className="bg-indigo-500 dark:bg-indigo-400 h-2 rounded-sm"
                     style={{ width: `${gameState.stats.creativity}%` }}
                   />
                 </div>
-                <div className="flex justify-between">
-                  <p className="text-sm text-bold text-zinc-400">Creativity</p>
+                <div className="flex justify-between gap-2">
+                  <p className="text-sm text-bold text-zinc-500 dark:text-zinc-400 transition-colors duration-500">Creativity</p>
                   {getCreativity(gameState.stats.creativity)}
                 </div>
               </div>
             </div>
           ) : null}
-          <div className="w-full h-[1px] bg-zinc-700 my-6"></div>
+          <div className="w-full h-[1px] bg-zinc-300 dark:bg-zinc-700 transition-colors duration-500 my-6"></div>
           <div
             className="flex justify-between cursor-pointer mb-6"
             onClick={() => setShowRelationships(!showRelationships)}
           >
-            <p className="text-bold text-zinc-400">Relationships</p>
-            <div className="flex items-center text-zinc-400">
+            <p className="text-bold text-zinc-600 dark:text-zinc-400 transition-colors duration-500">Relationships</p>
+            <div className="flex items-center text-zinc-500 dark:text-zinc-400 transition-colors duration-500">
               {showRelationships ? <ChevronUpIcon /> : <ChevronDownIcon />}
             </div>
           </div>
@@ -185,7 +185,7 @@ const GameState = ({ gameState, relationships, handleEndLife }) => {
                             : ""}
                         </p>
                       </div>
-                      <p className="text-sm text-zinc-400 ibm-plex-mono-regular flex justify-between my-1">
+                      <p className="text-sm text-zinc-500 dark:text-zinc-400 transition-colors duration-500 ibm-plex-mono-regular flex justify-between my-1">
                         Age
                         <span className="text-sm text-zinc-100">
                           {relationship.age}
@@ -193,7 +193,7 @@ const GameState = ({ gameState, relationships, handleEndLife }) => {
                       </p>
                       <div className="flex flex-col">
                         <div className="flex justify-between my-1">
-                          <p className="text-sm text-bold text-zinc-400">
+                          <p className="text-sm text-bold text-zinc-500 dark:text-zinc-400 transition-colors duration-500">
                             Relationship
                           </p>
                           <p className="ibm-plex-mono-regular ml-2 text-sm">
@@ -202,7 +202,7 @@ const GameState = ({ gameState, relationships, handleEndLife }) => {
                         </div>
 
                         <div className="flex text-zinc-200 justify-between my-1">
-                          <p className="text-sm text-bold text-zinc-400">
+                          <p className="text-sm text-bold text-zinc-500 dark:text-zinc-400 transition-colors duration-500">
                             Relationship Status
                           </p>
                           <div className="flex text-end">
@@ -217,15 +217,15 @@ const GameState = ({ gameState, relationships, handleEndLife }) => {
               </div>
             </div>
           ) : null}
-          <div className="w-full h-[1px] bg-zinc-700 mb-6 mt-4"></div>
+          <div className="w-full h-[1px] bg-zinc-300 dark:bg-zinc-700 transition-colors duration-500 mb-6 mt-4"></div>
         </div>
 
         <div
           className="flex justify-between cursor-pointer mb-6"
           onClick={() => setShowBackstory(!showBackstory)}
         >
-          <p className="text-bold text-zinc-400">Backstory</p>
-          <div className="flex items-center text-zinc-400">
+          <p className="text-bold text-zinc-600 dark:text-zinc-400 transition-colors duration-500">Backstory</p>
+          <div className="flex items-center text-zinc-500 dark:text-zinc-400 transition-colors duration-500">
             {showBackstory ? <ChevronUpIcon /> : <ChevronDownIcon />}
           </div>
         </div>
@@ -251,11 +251,11 @@ const GameState = ({ gameState, relationships, handleEndLife }) => {
           </div>
         ) : null}
       </div>
-      <div className="w-full h-[1px] bg-zinc-700 mb-4"></div>
+      <div className="w-full h-[1px] bg-zinc-300 dark:bg-zinc-700 transition-colors duration-500 mb-4"></div>
       <div className="flex gap-2 mt-8">
         <button
           onClick={handleEndLife}
-          className="bg-zinc-800 hover:bg-zinc-700 text-zinc-200 hover:text-white ibm-plex-mono-semibold text-sm flex-1 px-2 h-14 rounded"
+          className="bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 text-zinc-900 dark:text-zinc-100 hover:text-black dark:hover:text-white transition-colors duration-500 ibm-plex-mono-semibold text-sm flex-1 px-2 h-14 rounded"
         >
           End This Life
         </button>

@@ -1,5 +1,5 @@
 // src/components/Game.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import GameState from "./GameState";
 import ChoiceSelection from "./ChoiceSelection";
@@ -36,6 +36,7 @@ const Game = () => {
   const [happinessChange, setHappinessChange] = useState(0);
   const [changeToShow, setChangeToShow] = useState(null);
   const [isEnded, setIsEnded] = useState(false);
+  const continueButtonRef = useRef(null);
   const navigate = useNavigate();
   const { gameState, setGameState, relationships, setRelationships } =
     useGameState();
@@ -330,6 +331,13 @@ const Game = () => {
     }, 1000);
   };
 
+  const handleChoiceSelect = (index) => {
+    setSelectedChoiceIndex(index);
+    if (continueButtonRef.current) {
+      continueButtonRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
   if (!gameState) {
     return <LoadingSpinner message="Initializing game..." />;
   }
@@ -337,16 +345,10 @@ const Game = () => {
   const decisionsThisYear = getDecisionsForAge(gameState.age);
 
   return (
-    <div className="flex flex-col w-full mx-auto max-w-[1200px] px-8 py-4">
+    <div className="flex flex-col w-full mx-auto max-w-[1200px] px-8 py-4 bg-slate-100 dark:bg-zinc-900 transition-colors duration-500 min-h-screen">
       <div className="pb-4 flex justify-between">
         <Link to="/">
-          <h1 className="text-3xl w-48 font-bold mb-4">Life Simulation Game</h1>
-        </Link>
-        <Link to="/account">
-          <div className="flex items-center gap-3">
-            <p className="text-zinc-300">Account</p>
-            <div className="w-10 h-10 rounded-full bg-[url('https://images.unsplash.com/photo-1698159929253-98fc08508886?q=80&w=3089&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover"></div>
-          </div>
+          <h1 className="text-3xl w-48 font-bold mb-4 text-zinc-900 dark:text-zinc-100 transition-colors duration-500">Life Simulation</h1>
         </Link>
       </div>
 
@@ -375,67 +377,67 @@ const Game = () => {
                     <OutcomeDisplay choiceOutcome={choiceOutcome} />
                     <div className="flex py-5">
                       {fitnessChange > 0 ? (
-                        <div className="text-green-300 bg-green-700/50 rounded-md px-2 py-1 mr-2">
+                        <div className="text-green-200 bg-green-800/90 dark:text-green-200 dark:bg-green-700/50 transition-colors duration-500 rounded-md px-2 py-1 mr-2">
                           <strong>{fitnessChange > 5 ? "++" : "+"}</strong>{" "}
                           Fitness
                         </div>
                       ) : fitnessChange < 0 ? (
-                        <div className="text-red-300 bg-red-700/50 rounded-md px-2 py-1 mr-2">
+                        <div className="text-red-200 bg-red-800/90 dark:text-red-200 dark:bg-red-700/50 transition-colors duration-500 rounded-md px-2 py-1 mr-2">
                           <strong>{fitnessChange < -5 ? "--" : "-"}</strong>{" "}
                           Fitness
                         </div>
                       ) : null}
                       {charismaChange > 0 ? (
-                        <div className="text-green-300 bg-green-700/50 rounded-md px-2 py-1 mr-2">
+                        <div className="text-green-200 bg-green-800/90 dark:text-green-200 dark:bg-green-700/50 transition-colors duration-500 rounded-md px-2 py-1 mr-2">
                           <strong>{charismaChange > 5 ? "++" : "+"}</strong>{" "}
                           Charisma
                         </div>
                       ) : charismaChange < 0 ? (
-                        <div className="text-red-300 bg-red-700/50 rounded-md px-2 py-1 mr-2">
+                        <div className="text-red-200 bg-red-800/90 dark:text-red-200 dark:bg-red-700/50 transition-colors duration-500 rounded-md px-2 py-1 mr-2">
                           <strong>{charismaChange < -5 ? "--" : "-"}</strong>{" "}
                           Charisma
                         </div>
                       ) : null}
                       {creativityChange > 0 ? (
-                        <div className="text-green-300 bg-green-700/50 rounded-md px-2 py-1 mr-2">
+                        <div className="text-green-200 bg-green-800/90 dark:text-green-200 dark:bg-green-700/50 transition-colors duration-500 rounded-md px-2 py-1 mr-2">
                           <strong> {creativityChange > 5 ? "++" : "+"}</strong>{" "}
                           Creativity
                         </div>
                       ) : creativityChange < 0 ? (
-                        <div className="text-red-300 bg-red-700/50 rounded-md px-2 py-1 mr-2">
+                        <div className="text-red-200 bg-red-800/90 dark:text-red-200 dark:bg-red-700/50 transition-colors duration-500 rounded-md px-2 py-1 mr-2">
                           <strong>{creativityChange < -5 ? "--" : "-"}</strong>{" "}
                           Creativity
                         </div>
                       ) : null}
                       {healthChange > 0 ? (
-                        <div className="text-green-300 bg-green-700/50 rounded-md px-2 py-1 mr-2">
+                        <div className="text-green-200 bg-green-800/90 dark:text-green-200 dark:bg-green-700/50 transition-colors duration-500 rounded-md px-2 py-1 mr-2">
                           <strong>{healthChange > 5 ? "++" : "+"}</strong>{" "}
                           Health
                         </div>
                       ) : healthChange < 0 ? (
-                        <div className="text-red-300 bg-red-700/50 rounded-md px-2 py-1 mr-2">
+                        <div className="text-red-200 bg-red-800/90 dark:text-red-200 dark:bg-red-700/50 transition-colors duration-500 rounded-md px-2 py-1 mr-2">
                           <strong>{healthChange < -5 ? "--" : "-"}</strong>{" "}
                           Health
                         </div>
                       ) : null}
                       {happinessChange > 0 ? (
-                        <div className="text-green-300 bg-green-700/50 rounded-md px-2 py-1 mr-2">
+                        <div className="text-green-200 bg-green-800/90 dark:text-green-200 dark:bg-green-700/50 transition-colors duration-500 rounded-md px-2 py-1 mr-2">
                           <strong>{happinessChange > 5 ? "++" : "+"}</strong>{" "}
                           Happiness
                         </div>
                       ) : happinessChange < 0 ? (
-                        <div className="text-red-300 bg-red-700/50 rounded-md px-2 py-1 mr-2">
+                        <div className="text-red-200 bg-red-800/90 dark:text-red-200 dark:bg-red-700/50 transition-colors duration-500 rounded-md px-2 py-1 mr-2">
                           <strong>{happinessChange < -5 ? "--" : "-"}</strong>{" "}
                           Happiness
                         </div>
                       ) : null}
                       {intelligenceChange > 0 ? (
-                        <div className="text-green-300 bg-green-700/50 rounded-md px-2 py-1 mr-2">
+                        <div className="text-green-200 bg-green-800/90 dark:text-green-200 dark:bg-green-700/50 transition-colors duration-500 rounded-md px-2 py-1 mr-2">
                           <strong>{intelligenceChange > 5 ? "++" : "+"}</strong>{" "}
                           Intelligence
                         </div>
                       ) : intelligenceChange < 0 ? (
-                        <div className="text-red-300 bg-red-700/50 rounded-md px-2 py-1 mr-2">
+                        <div className="text-red-200 bg-red-800/90 dark:text-red-200 dark:bg-red-700/50 transition-colors duration-500 rounded-md px-2 py-1 mr-2">
                           <strong>
                             {intelligenceChange < -5 ? "--" : "-"}
                           </strong>{" "}
@@ -446,7 +448,7 @@ const Game = () => {
                     <div className="mt-2 flex justify-end">
                       <button
                         onClick={handleOutcomeContinue}
-                        className="bg-white hover:bg-zinc-200 text-black ibm-plex-mono-semibold leading-tight py-4 px-8 rounded-xl mt-4 disabled:opacity-50 disabled:cursor-default disabled:hover:bg-white "
+                        className="bg-zinc-800 dark:bg-zinc-100 hover:bg-zinc-700 dark:hover:bg-zinc-200 text-zinc-100 dark:text-zinc-900 transition-colors duration-500 ibm-plex-mono-semibold leading-tight py-4 px-8 rounded-xl mt-4 disabled:opacity-50 disabled:cursor-default disabled:hover:bg-white dark:disabled:hover:bg-zinc-800"
                       >
                         Continue
                       </button>
@@ -460,7 +462,7 @@ const Game = () => {
                           scenario={currentScenario}
                           choices={choices}
                           selectedIndex={selectedChoiceIndex}
-                          setSelectedIndex={setSelectedChoiceIndex}
+                          setSelectedIndex={handleChoiceSelect}
                           age={gameState.age}
                           decisionsMadeThisYear={decisionsMadeThisYear}
                           decisionsThisYear={decisionsThisYear}
@@ -469,10 +471,11 @@ const Game = () => {
                     ) : (
                       <ChoiceError />
                     )}
-                    <div className="mt-2 flex justify-end">
+                    <div className="flex justify-end">
                       <button
+                        ref={continueButtonRef}
                         onClick={handleContinue}
-                        className="bg-white hover:bg-zinc-200 text-black ibm-plex-mono-semibold leading-tight py-4 px-6 rounded-xl mt-4 disabled:opacity-50 disabled:cursor-default disabled:hover:bg-white "
+                        className="bg-zinc-800 dark:bg-zinc-100 hover:bg-zinc-700 dark:hover:bg-zinc-100 text-white dark:text-black ibm-plex-mono-semibold leading-tight py-4 px-6 rounded-xl mt-4 disabled:opacity-50 disabled:cursor-default disabled:hover:bg-white dark:disabled:hover:bg-zinc-800"
                         disabled={selectedChoiceIndex === null}
                       >
                         Continue

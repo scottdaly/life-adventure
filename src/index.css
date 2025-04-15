@@ -85,3 +85,26 @@
   font-weight: 700;
   font-style: italic;
 }
+
+.scroll-bar {
+  scrollbar-width: thin;
+  scrollbar-color: gray transparent;
+}
+
+.scroll-bar::-webkit-scrollbar {
+  width: 12px;
+}
+
+.scroll-bar::-webkit-scrollbar-thumb {
+  background-color: #000;
+}
+
+.scroll-bar::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+
+/* Hide scrollbar arrows */
+.scroll-bar::-webkit-scrollbar-button {
+  display: none;
+}
+

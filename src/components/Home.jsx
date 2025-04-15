@@ -14,25 +14,26 @@ import {
 import { generateBackstory } from "../services/geminiFlashService";
 import { useGameState } from "../context/gameStateContext";
 import { Trash } from "lucide-react";
+import { useTheme } from '../context/ThemeContext';
 
 const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm, characterName }) => {
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-zinc-800 p-6 rounded-lg shadow-lg max-w-md w-full mx-4">
-        <h2 className="text-xl font-semibold mb-4">Confirm Deletion</h2>
+      <div className="bg-zinc-100 dark:bg-zinc-800 p-6 rounded-lg shadow-lg max-w-md w-full mx-4">
+        <h2 className="text-xl font-semibold mb-1">Confirm Deletion</h2>
         <p className="mb-6">Are you sure you want to delete {characterName}'s life? This action cannot be undone.</p>
-        <div className="flex justify-end gap-4">
+        <div className="flex justify-end gap-3">
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-zinc-600 hover:bg-zinc-700 rounded"
+            className="px-4 py-2 bg-zinc-300 dark:bg-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-600 rounded"
           >
             Cancel
           </button>
           <button
             onClick={onConfirm}
-            className="px-4 py-2 bg-red-500 hover:bg-red-700 rounded"
+            className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded"
           >
             Delete
           </button>
@@ -52,6 +53,7 @@ const Home = () => {
   const navigate = useNavigate();
   const { user, loading: authLoading } = useAuth();
   const { setGameState, setRelationships } = useGameState();
+  const { isDarkMode } = useTheme();
 
   const generateRandomStat = () => Math.floor(Math.random() * 101);
 
@@ -218,68 +220,86 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen w-full mt-16 p-4">
-      <h1 className="text-4xl font-bold mb-8">Life Simulation Game</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen w-full p-4 relative">
+      <div 
+        className="absolute inset-0 bg-cover bg-[url(/bg.png)] dark:bg-[url(/bg-dark3.png)] bg-center bg-no-repeat opacity-100 -z-10 transition-all duration-500"    
+      ></div>
+      <div className="absolute inset-0 bg-black/20 dark:bg-transparent -z-10 transition-all duration-500"></div>
+      <h1 className="text-7xl text-white font-bold mb-8 max-w-sm leading-[0.9]">Life Simulation</h1>
+      <div className="flex flex-col items-center justify-center z-10 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-zinc-900 dark:text-zinc-100 transition-all duration-500 shadow-lg w-full max-w-sm">
+      
       {authLoading ? (
+        <div className="flex flex-col items-center justify-center h-full max-h-[400px] w-full">
         <LoadingSpinner message="Loading..." />
+        </div>
       ) : user ? (
+        
         isLoading ? (
+          <div className="flex flex-col items-center justify-center h-full w-full mx-12 my-24">
           <LoadingSpinner message="A baby is being born..." />
+          
+          </div>
         ) : (
+
           <div className="flex flex-col w-full max-w-3xl items-center justify-center">
+            <div className="flex flex-col items-center justify-center p-4 w-full">
             <button
               onClick={handleStartNewLife}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-8"
+              className="bg-emerald-700 dark:bg-blue-800 hover:bg-emerald-800 text-white transition-colors duration-500 text-xl font-bold py-4 px-4 w-full rounded"
             >
               Start a New Life
             </button>
+            </div>
 
             {gameStates && gameStates.length > 0 && (
-              <div className="w-full mb-8">
-                <h2 className="text-xl text-zinc-200 tracking-wide mb-4">
+              <div className="w-full mt-4">
+                <h2 className="text-xl tracking-wide mb-2 ml-6">
                   Previous Lives
                 </h2>
-                <ul className="flex flex-col-reverse bg-zinc-800 w-full rounded px-8 pt-6 pb-8 mb-4 max-h-[500px] overflow-y-auto">
-                  {gameStates.map(
-                    (state) =>
-                      state && (
-                        <li
-                          key={state.id}
-                          className="mb-4 pb-4 border-b flex flex-row justify-between"
-                        >
-                          <div>
-                          <p>
-                            <strong>Name:</strong> {state.name || "Unknown"}
-                          </p>
-                          <p>
-                            <strong>Age:</strong> {state.age}
-                          </p>
-                          <p>
-                            <strong>Location:</strong>{" "}
-                            {state.location || "Unknown"}
-                          </p>
-                          <div className="flex gap-2 mt-2">
-                            <button
-                              onClick={() => handleContinueLife(state)}
-                              className="bg-green-700 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
-                            >
-                              Continue This Life
-                            </button>
+                <div className="w-full pl-6">
+                  <ul className="flex flex-col-reverse w-full max-h-[400px] overflow-y-auto scroll-bar scrollbar-thin scrollbar-thumb-zinc-400 scrollbar-track-transparent pr-4">
+                    {gameStates.map(
+                      (state) =>
+                        state && (
+                          <li
+                            key={state.id}
+                            className="mb-4 pb-4 border-b flex flex-row justify-between"
+                          >
+                            <div>
+                            <p className="text-zinc-600 dark:text-zinc-400 font-mono transition-colors duration-500">
+                              {state.age} years old
+                            </p>
+                            <p className="font-bold text-xl font-mono">
+                              {state.name || "Unknown"}
+                            </p>
                             
-                          </div>
-                          </div>
-                          <div className="flex flex-row items-center justify-center">
-                          <button
-                              onClick={() => openDeleteModal(state.id, state.name)}
-                              className="hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
-                            >
-                              <Trash className="w-4 h-4" />
-                            </button>
+                            <p className="text-zinc-600 dark:text-zinc-400 font-mono transition-colors duration-500">
+                             {state.location || "Unknown"}
+                           </p>
+                            
+                            <div className="flex gap-2 mt-2">
+                              <button
+                                onClick={() => handleContinueLife(state)}
+                                className="bg-zinc-200 dark:bg-zinc-700 text-zinc-800 dark:text-zinc-100 hover:bg-zinc-300 dark:hover:bg-zinc-600 hover:text-black dark:hover:text-white transition-colors duration-500 font-bold py-1 px-4 rounded"
+                              >
+                                Continue This Life
+                              </button>
+                              
                             </div>
-                        </li>
-                      )
-                  )}
-                </ul>
+                            </div>
+                            <div className="flex flex-row items-center justify-center">
+                            <button
+                                onClick={() => openDeleteModal(state.id, state.name)}
+                                className="hover:bg-red-700 hover:text-white dark:hover:bg-red-700 dark:hover:text-white text-zinc-600 dark:text-zinc-400 transition-colors duration-500 font-bold py-2 px-2 rounded"
+                              >
+                                <Trash className="w-4 h-4" />
+                              </button>
+                              </div>
+                          </li>
+                        )
+                    )}
+                  </ul>
+                </div>
               </div>
             )}
 
@@ -326,25 +346,15 @@ const Home = () => {
             )}
           </div>
         )
+       
       ) : (
-        <div className="flex flex-col items-center justify-center gap-4">
-          <p className="text-xl">Log in to continue</p>
-          <div className="flex flex-row gap-2 text-zinc-400">
-            {showLogin ? (
-              <p>Don't have an account?</p>
-            ) : (
-              <p>Already have an account?</p>
-            )}
-            <button
-              onClick={() => setShowLogin(!showLogin)}
-              className="text-blue-500 hover:text-blue-700"
-            >
-              {showLogin ? "Register" : "Login"}
-            </button>
+        <div className="flex flex-col items-center justify-center gap-1 w-full">
+          <div className="flex flex-col items-center justify-center">             
           </div>
-          {showLogin ? <Login /> : <Register />}
+          {showLogin ? <Login showLogin={showLogin} setShowLogin={setShowLogin} /> : <Register showLogin={showLogin} setShowLogin={setShowLogin} />}
         </div>
       )}
+      </div>
     </div>
   );
 };

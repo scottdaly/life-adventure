@@ -1,6 +1,6 @@
 import { fetchWithAuth } from "../components/AuthContext";
 
-const API_ENDPOINT = "http://localhost:3000";
+const API_ENDPOINT = import.meta.env.VITE_API_URL || "";
 
 export const saveNewGame = async (gameState) => {
   try {
